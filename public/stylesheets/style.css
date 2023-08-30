@@ -1,0 +1,19 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+span.platform_img.win {
+	background-image: url( 'https://store.akamai.steamstatic.com/public/images/v6/icon_platform_win.png?v=3' );
+}
+
+span.platform_img.mac {
+	background-image: url( 'https://store.akamai.steamstatic.com/public/images/v6/icon_platform_mac.png' );
+}
+
+span.platform_img.linux {
+	background-image: url( 'https://store.akamai.steamstatic.com/public/images/v6/icon_platform_linux.png' );
+}

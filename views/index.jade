@@ -1,0 +1,12 @@
+extends layout
+
+// TODO: Work out how to display platform icons
+block content
+  h1= title
+  each game in games
+    .game
+      h2= game.name
+      img(src=game.capsule)
+      p Overall Reviews: #{game.review_desc}
+      p Release Date: #{game.release_string}
+      // Add more details as needed
