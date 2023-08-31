@@ -1,0 +1,22 @@
+//- TODO: Display icon for the relevant stores
+extends layout
+
+block content
+  h1= title
+  if gameDeals.info
+    img(src=gameDeals.info.thumb, alt=gameDeals.info.title)
+    h2= gameDeals.info.title
+
+  if gameDeals.cheapestPriceEver
+    p Cheapest Price Ever: #{gameDeals.cheapestPriceEver.price}
+
+  if gameDeals.deals && gameDeals.deals.length > 0
+    h3 Deals
+    each deal in gameDeals.deals
+      .card.mb-3
+        .card-body
+          p Store ID: #{deal.storeID}
+          p Deal ID: #{deal.dealID}
+          p Price: #{deal.price}
+          p Retail Price: #{deal.retailPrice}
+          p Savings: #{deal.savings}

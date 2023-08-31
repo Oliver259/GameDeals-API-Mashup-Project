@@ -68,4 +68,31 @@ router.get("/deals/:gameId", async function (req, res, next) {
   }
 });
 
+router.get("/details/:gameTitle", async function (req, res, next) {
+  try {
+    const gameTitle = req.params.gameTitle;
+
+    // Fetch game info from CheapShark API using the gameTitle
+    const cheapSharkResponse = await fetch(`https://cheapshark.com/api/1.0/games?title=${encodeURIComponent(gameTitle)}`);
+    const cheapSharkData = await cheapSharkResponse.json();
+
+    // Extract gameId from CheapShark response
+    const gameId = cheapSharkData[0].gameID;
+
+    // Fetch game deals using gameId
+    const gameDealsResponse = await fetch(`https://www.cheapshark.com/api/1.0/games?id=${gameId}`);
+    const gameDealsData = await gameDealsResponse.json();
+
+    res.render("details", {
+      title: "Game Details", gameDeals: gameDealsData,
+    });
+  } catch (error) {
+    console.error("Error fetching game details and deals:", error);
+    res.render("error", {
+      games: [],
+      error: error,
+    });
+  }
+});
+
 module.exports = router;
