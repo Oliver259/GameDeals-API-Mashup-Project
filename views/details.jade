@@ -1,4 +1,4 @@
-//- TODO: Display icon for the relevant stores
+//- TODO: Display icon for the relevant stores and fix description to show proper formatting formatting from the steam app details api
 extends layout
 
 block content
@@ -20,3 +20,13 @@ block content
           p Price: #{deal.price}
           p Retail Price: #{deal.retailPrice}
           p Savings: #{deal.savings}
+
+    if steamAppDetails 
+        h3 Steam App Details 
+        if steamAppDetails.detailed_description 
+            p Detailed Description: #{steamAppDetails.detailed_description}
+
+        // Display minimum PC requirements if available
+        if steamAppDetails.pc_requirements && steamAppDetails.pc_requirements.minimum
+            h4 PC Requirements
+            | !{steamAppDetails.pc_requirements.minimum}

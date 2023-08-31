@@ -77,14 +77,22 @@ router.get("/details/:gameTitle", async function (req, res, next) {
     const cheapSharkData = await cheapSharkResponse.json();
 
     // Extract gameId from CheapShark response
-    const gameId = cheapSharkData[0].gameID;
+    const gameId = cheapSharkData[0].gameID; // Assume the first result is the most relevant one
 
     // Fetch game deals using gameId
     const gameDealsResponse = await fetch(`https://www.cheapshark.com/api/1.0/games?id=${gameId}`);
     const gameDealsData = await gameDealsResponse.json();
 
+    // Extract steamAppID from gameDeals Data
+    const steamAppID = gameDealsData.info.steamAppID;
+    console.log(steamAppID);
+
+    // Fetch game details from Steam's app details API using steamAppID
+    const steamAppResponse  = await fetch(`https://store.steampowered.com/api/appdetails/?appids=${steamAppID}`);
+    const steamAppDetailsData = await steamAppResponse.json();
+
     res.render("details", {
-      title: "Game Details", gameDeals: gameDealsData,
+      title: "Game Details", gameDeals: gameDealsData, steamAppDetails: steamAppDetailsData[steamAppID].data, // Extract data for the specific steamAppID
     });
   } catch (error) {
     console.error("Error fetching game details and deals:", error);
