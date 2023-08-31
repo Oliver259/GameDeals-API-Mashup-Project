@@ -1,32 +1,31 @@
-//- TODO: Display icon for the relevant stores and fix description to show proper formatting formatting from the steam app details api
+//- TODO: Display icon for the relevant stores and fix description to show proper formatting from the steam app details api
 extends layout
 
 block content
-  h1= title
-  if gameDeals.info
-    img(src=gameDeals.info.thumb, alt=gameDeals.info.title)
-    h2= gameDeals.info.title
-
-  if gameDeals.cheapestPriceEver
-    p Cheapest Price Ever: #{gameDeals.cheapestPriceEver.price}
-
-  if gameDeals.deals && gameDeals.deals.length > 0
-    h3 Deals
-    each deal in gameDeals.deals
-      .card.mb-3
-        .card-body
-          p Store ID: #{deal.storeID}
-          p Deal ID: #{deal.dealID}
-          p Price: #{deal.price}
-          p Retail Price: #{deal.retailPrice}
-          p Savings: #{deal.savings}
-
+  .text-center
+    h1.mt-4.mb-4= title
+    if gameDeals.info
+      img(src=gameDeals.info.thumb, alt=gameDeals.info.title)
+      h2= gameDeals.info.title
+      
     if steamAppDetails 
-        h3 Steam App Details 
-        if steamAppDetails.detailed_description 
-            p Detailed Description: #{steamAppDetails.detailed_description}
+      if steamAppDetails.short_description 
+        p!= steamAppDetails.short_description
+    if gameDeals.cheapestPriceEver
+      p Cheapest Price Ever: #{gameDeals.cheapestPriceEver.price}
 
-        // Display minimum PC requirements if available
-        if steamAppDetails.pc_requirements && steamAppDetails.pc_requirements.minimum
-            h4 PC Requirements
-            | !{steamAppDetails.pc_requirements.minimum}
+    if gameDeals.deals && gameDeals.deals.length > 0
+      h3 Deals
+      .row.justify-content-center
+        each deal in gameDeals.deals
+            .col-md-3
+                .card.mb-3
+                    .card-body
+                        h5.card-title Store ID: #{deal.storeID}
+                        p.card-text Price: $#{deal.price} USD
+                        p.card-text Retail Price: $#{deal.retailPrice} USD
+                        p.card-text Savings: #{((deal.retailPrice - deal.price) / deal.retailPrice * 100).toFixed(2)}%
+
+    if steamAppDetails.pc_requirements && steamAppDetails.pc_requirements.minimum
+      h4 PC Requirements
+      p.card-text!= steamAppDetails.pc_requirements.minimum
