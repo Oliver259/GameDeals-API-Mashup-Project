@@ -12,4 +12,9 @@ block content
             h5.card-title= game.name
             p.card-text Overall Reviews: #{game.review_desc}
             p.card-text Release Date: #{game.release_string}
-            a.btn.btn-primary(href=`/details/${encodeURIComponent(game.name)}`) Details
+            .d-flex.align-items-center
+              a.btn.btn-primary(href=`/details/${encodeURIComponent(game.name)}`) Details
+              // Parse platform_icons and display corresponding icons
+              - const platforms = game.platform_icons.match(/win|mac|linux/g) || []
+              each platform in platforms
+                span.platform_img.ms-2(class=platform)

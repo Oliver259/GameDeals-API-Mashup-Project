@@ -1,19 +1,26 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
 
 a {
   color: #00B7FF;
 }
+
+/* Windows logo was downloaded from https://www.flaticon.com/free-icon/windows-platform-logo_13738 */
 span.platform_img.win {
-	background-image: url( 'https://store.akamai.steamstatic.com/public/images/v6/icon_platform_win.png?v=3' );
+	background-image: url( '/images/windows-logo.png' );
 }
 
+/* Mac logo was downloaded from https://www.flaticon.com/free-icon/apple-black-logo_15476 */
 span.platform_img.mac {
-	background-image: url( 'https://store.akamai.steamstatic.com/public/images/v6/icon_platform_mac.png' );
+	background-image: url( '/images/mac-logo.png' );
 }
 
+/* Linux logo was downloaded from https://www.flaticon.com/free-icon/linux-platform_13702 */
 span.platform_img.linux {
-	background-image: url( 'https://store.akamai.steamstatic.com/public/images/v6/icon_platform_linux.png' );
+	background-image: url( '/images/linux-logo.png' );
+}
+
+span.platform_img {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background-repeat: no-repeat;
 }
