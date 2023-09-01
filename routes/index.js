@@ -38,36 +38,6 @@ router.get("/", async function (req, res, next) {
   }
 });
 
-router.get("/compare/:gameTitle", async function (req, res, next) {
-  try {
-    const gameTitle = req.params.gameTitle;
-    const cheapSharkResponse = await fetch(`https://www.cheapshark.com/api/1.0/games?title=${encodeURIComponent(gameTitle)}`);
-    const cheapSharkData = await cheapSharkResponse.json();
-
-    res.json(cheapSharkData);
-  } catch (error) {
-    console.error('Error fetching game prices:', error);
-    res.status(500).json({ error: 'An error occured while fetching game prices. '});
-  }
-});
-
-router.get("/deals/:gameId", async function (req, res, next) {
-  try {
-    const gameID = req.params.gameId;
-
-    // Fetch game deals from from CheapShark API using gameID
-    const gameDealsResponse = await fetch(
-      `https://www.cheapshark.com/api/1.0/games?id=${gameID}`
-    );
-    const gameDealsData = await gameDealsResponse.json();
-
-    res.json(gameDealsData)
-  } catch (error) {
-    console.error("Error fetching game deals:", error);
-    res.status(500).json({ error: 'An error occured while fetching game deals. '});
-  }
-});
-
 router.get("/details/:gameTitle", async function (req, res, next) {
   try {
     const gameTitle = req.params.gameTitle;
