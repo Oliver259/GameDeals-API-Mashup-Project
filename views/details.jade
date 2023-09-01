@@ -29,3 +29,18 @@ block content
     if steamAppDetails.pc_requirements && steamAppDetails.pc_requirements.minimum
       h4 PC Requirements
       p.card-text!= steamAppDetails.pc_requirements.minimum
+
+    if youtubeReviews
+      h3 Youtube Reviews 
+      each review in youtubeReviews
+        .card.mb-3 
+          .card-body 
+            img.card-img-top(src=review.snippet.thumbnails.high.url, alt=review.snippet.title, style='max-width: 50%; max-height: 50%;')
+            h5.card-title!= review.snippet.title
+            p.card-text Description: #{review.snippet.description}
+            p.card-text Published At: #{review.snippet.publishedAt}
+            a.btn.btn-primary(href='https://www.youtube.com/watch?v=' + review.id.videoId, target='_blank') Watch Video
+
+
+
+    
