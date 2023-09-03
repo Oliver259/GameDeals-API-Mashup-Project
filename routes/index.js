@@ -80,7 +80,7 @@ router.get("/details/:gameTitle", async function (req, res, next) {
     // Search for reviews of the selected game on Youtube based on the game title
     const youtubeSearchResponse = await youtube.search.list({
       q: `${gameTitle} review`,
-      maxResults: 5,
+      maxResults: 8,
       part: 'snippet'
     });
 
