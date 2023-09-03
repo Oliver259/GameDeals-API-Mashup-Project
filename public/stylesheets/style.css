@@ -3,19 +3,19 @@ a {
   color: #00B7FF;
 }
 
-/* Windows logo was downloaded from https://www.flaticon.com/free-icon/windows-platform-logo_13738 */
+/* Windows logo was downloaded from https://store.cloudflare.steamstatic.com/public/images/v6/icon_platform_win.png?v=38 */
 span.platform_img.win {
-	background-image: url( '/images/windows-logo.png' );
+	background-image: url( '/images/icon_platform_win.png' );
 }
 
-/* Mac logo was downloaded from https://www.flaticon.com/free-icon/apple-black-logo_15476 */
+/* Mac logo was downloaded from https://store.cloudflare.steamstatic.com/public/images/v6/icon_platform_mac.png?v=3 */
 span.platform_img.mac {
-	background-image: url( '/images/mac-logo.png' );
+	background-image: url( '/images/icon_platform_mac.png' );
 }
 
-/* Linux logo was downloaded from https://www.flaticon.com/free-icon/linux-platform_13702 */
+/* Linux logo was downloaded from https://store.cloudflare.steamstatic.com/public/images/v6/icon_platform_linux.png?v=3 */
 span.platform_img.linux {
-	background-image: url( '/images/linux-logo.png' );
+	background-image: url( '/images/icons8-linux-50.png' );
 }
 
 span.platform_img {

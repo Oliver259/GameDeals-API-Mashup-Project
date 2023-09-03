@@ -5,7 +5,7 @@ block content
   .text-center
     h1.mt-4.mb-4= title
     if gameDeals.info
-      img(src=gameDeals.info.thumb, alt=gameDeals.info.title)
+      img(src=steamAppDetails.header_image, alt=gameDeals.info.title)
       h2= gameDeals.info.title
       
     if steamAppDetails 
@@ -15,32 +15,36 @@ block content
       p Cheapest Price Ever: #{gameDeals.cheapestPriceEver.price}
 
     if gameDeals.deals && gameDeals.deals.length > 0
-      h3 Deals
+      h3.mb-3 Deals
       .row.justify-content-center
         each deal in gameDeals.deals
             .col-md-3
-                .card.mb-3
+                .card.ms-4.mb-4.me-4.border
                     .card-body
-                        h5.card-title Store ID: #{deal.storeID}
+                        img(src="https://www.cheapshark.com/img/stores/banners/" + deal.storeID + ".png")
                         p.card-text Price: $#{deal.price} USD
                         p.card-text Retail Price: $#{deal.retailPrice} USD
                         p.card-text Savings: #{((deal.retailPrice - deal.price) / deal.retailPrice * 100).toFixed(2)}%
 
     if steamAppDetails.pc_requirements && steamAppDetails.pc_requirements.minimum
       h4 PC Requirements
-      p.card-text!= steamAppDetails.pc_requirements.minimum
+      span.card-text!= steamAppDetails.pc_requirements.minimum.replace(/<li>/g, '<span>').replace(/<\/li>/g, '</span>')
+      span.card-text!= steamAppDetails.pc_requirements.recommended.replace(/<li>/g, '<span>').replace(/<\/li>/g, '</span>')
+      h4 Mac Requirements 
+      span.card-text!= steamAppDetails.mac_requirements.minimum.replace(/<li>/g, '<span>').replace(/<\/li>/g, '</span>')
+      span.card-text!= steamAppDetails.mac_requirements.recommended.replace(/<li>/g, '<span>').replace(/<\/li>/g, '</span>')
+      h4 Linux Requirements 
+      span.card-text!= steamAppDetails.linux_requirements.minimum.replace(/<li>/g, '<span>').replace(/<\/li>/g, '</span>')
+      span.card-text!= steamAppDetails.linux_requirements.recommended.replace(/<li>/g, '<span>').replace(/<\/li>/g, '</span>')
+
 
     if youtubeReviews
       h3 Youtube Reviews 
       each review in youtubeReviews
-        .card.mb-3 
+        .card.m-3.border
           .card-body 
             img.card-img-top(src=review.snippet.thumbnails.high.url, alt=review.snippet.title, style='max-width: 50%; max-height: 50%;')
-            h5.card-title!= review.snippet.title
+            h5.card-title.mt-2!= review.snippet.title
             p.card-text Description: #{review.snippet.description}
             p.card-text Published At: #{review.snippet.publishedAt}
             a.btn.btn-primary(href='https://www.youtube.com/watch?v=' + review.id.videoId, target='_blank') Watch Video
-
-
-
-    
