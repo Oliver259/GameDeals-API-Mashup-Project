@@ -12,7 +12,7 @@ block content
       if steamAppDetails.short_description 
         p!= steamAppDetails.short_description
     if gameDeals.cheapestPriceEver
-      p Cheapest Price Ever: #{gameDeals.cheapestPriceEver.price}
+      p Cheapest Price Ever: $#{gameDeals.cheapestPriceEver.price} USD
 
     if gameDeals.deals && gameDeals.deals.length > 0
       h3.mb-3 Deals
@@ -38,13 +38,15 @@ block content
       span.card-text!= steamAppDetails.linux_requirements.recommended.replace(/<li>/g, '<span>').replace(/<\/li>/g, '</span>')
 
 
-    if youtubeReviews
-      h3 Youtube Reviews 
-      each review in youtubeReviews
-        .card.m-3.border
-          .card-body 
-            img.card-img-top(src=review.snippet.thumbnails.high.url, alt=review.snippet.title, style='max-width: 50%; max-height: 50%;')
-            h5.card-title.mt-2!= review.snippet.title
-            p.card-text Description: #{review.snippet.description}
-            p.card-text Published At: #{review.snippet.publishedAt}
-            a.btn.btn-primary(href='https://www.youtube.com/watch?v=' + review.id.videoId, target='_blank') Watch Video
+     if youtubeReviews
+      h3 Youtube Reviews
+      .row.justify-content-center
+        each review in youtubeReviews
+          .col-md-3
+            .card.mb-3.border.m-3
+              .card-body 
+                img.card-img-top(src=review.snippet.thumbnails.high.url, alt=review.snippet.title, style='max-width: 100%; max-height: 100%;')
+                h5.card-title.mt-2!= review.snippet.title
+                p.card-text #{review.snippet.description}
+                p.card-text Published: #{new Date(review.snippet.publishedAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
+                a.btn.btn-primary(href='https://www.youtube.com/watch?v=' + review.id.videoId, target='_blank') Watch Video
