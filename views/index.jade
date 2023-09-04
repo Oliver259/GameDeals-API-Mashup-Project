@@ -1,20 +1,13 @@
 extends layout
 
 block content
-  .text-center
-    h1.mt-4.mb-4= title
-  .row.mx-auto
-    each game in games
-      .col-md-2
-        .card.mb-4
-          img.card-img-top(src=game.capsule, alt=game.name, style=`max-height: 100%; object-fit: contain;`)
-          .card-body
-            h5.card-title= game.name
-            p.card-text Overall Reviews: #{game.review_desc}
-            p.card-text Release Date: #{game.release_string}
-            .d-flex.align-items-center
-              a.btn.btn-primary(href=`/details/${encodeURIComponent(game.name)}`) Details
-              // Parse platform_icons and display corresponding icons
-              - const platforms = game.platform_icons.match(/win|mac|linux/g) || []
-              each platform in platforms
-                span.platform_img.ms-2(class=platform)
+  .container
+    .row
+      .col-md-6.offset-md-3
+        h1.text-center Enter Your Steam ID
+        form(action="/wishlist", method="POST")
+          .form-group
+            label(for="steamId") Steam ID:
+            input#steamId.form-control(type="text", name="steamID", placeholder="Enter your Steam ID", required)
+          .form-group.text-center
+            button.btn.btn-primary(type="submit") Go to Wishlist

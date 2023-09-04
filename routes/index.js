@@ -9,9 +9,18 @@ const Youtube_API_KEY = 'AIzaSyA3WxDsVXc07K6DSkl0uqLRtxPYcLqBbrU';
 
 // TODO: Add UI for game search and game deals so the user can see the response
 
-router.get("/", async function (req, res, next) {
+router.get('/', (req, res) => {
+  res.render('index', { title: 'Steam ID Input' });
+});
+
+router.post("/wishlist", function (req, res) {
+  const steamID = req.body.steamID;
+  res.redirect(`/wishlist/${steamID}`);
+});
+
+router.get("/wishlist/:steamID", async function (req, res, next) {
   try {
-    const STEAM_ID = "76561198277446098";
+    const STEAM_ID = req.params.steamID
     const totalPages = 10;
     const wishlistedGames = [];
 
@@ -26,7 +35,7 @@ router.get("/", async function (req, res, next) {
       wishlistedGames.push(...gamesOnPage);
     }
 
-    res.render("index", {
+    res.render("wishlist", {
       title: "Wishlist",
       games: wishlistedGames,
     });
