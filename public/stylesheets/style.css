@@ -35,8 +35,3 @@ span.platform_img {
 .requirements ul {
   list-style-type: none;
 }
-
-/* Center-align text within list items */
-.requirements ul li {
-  text-align: center;
-}
