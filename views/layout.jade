@@ -8,15 +8,11 @@ html(data-bs-theme="dark")
   body
     nav.navbar.navbar-expand-lg.border-bottom
       .container-fluid
-        a.navbar-brand.text-white(href='#') Your Brand
+        a.navbar-brand.text-white(href='/') GameDeals
         //- button.navbar-toggler(type='button', data-bs-toggle='collapse', data-bs-target='#navbarNav', aria-controls='navbarNav', aria-expanded='false', aria-label='Toggle navigation')
         //-   span.navbar-toggler-icon
         #navbarNav.collapse.navbar-collapse
           ul.navbar-nav.me-auto.mb-2.mb-lg-0
             li.nav-item
               a.nav-link.text-white(href='/') Home
-            li.nav-item
-              a.nav-link.text-white(href='#') About
-            li.nav-item
-              a.nav-link.text-white(href='#') Contact
     block content
