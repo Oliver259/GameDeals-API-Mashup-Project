@@ -24,8 +24,11 @@ app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+  var error = new Error('Page Not Found'); // Change the error message here
+  error.status = 404;
+  next(error);
 });
+
 
 // error handler
 app.use(function(err, req, res, next) {

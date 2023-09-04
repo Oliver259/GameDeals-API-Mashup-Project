@@ -1,9 +1,22 @@
 extends layout
 
 block content
-  h1= message
-  if error
-    h2= error.status
-    pre= error.stack
-  else
-    p An error occurred. Please try again later.
+  .text-center.mt-2
+    h1= "Oops! Something went wrong."
+    if error
+      h2 Error Details:
+      .alert.alert-danger
+        p
+          strong #{error.message}
+      h2 What can you do?
+      - if (error.status === 404) // Check if the error status is 404
+        .alert.alert-info
+          p This page is not found. Please check the URL and try again.
+      - else
+        .alert.alert-info
+          p
+            | It seems like there was an error while processing your request.
+            | Please try again later.
+    else
+      .alert.alert-danger
+        h2 An error occurred. Please try again later.

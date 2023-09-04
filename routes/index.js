@@ -72,7 +72,10 @@ router.get("/details/:gameTitle", async function (req, res, next) {
 
     // Extract steamAppID from gameDeals Data
     const steamAppID = gameDealsData.info.steamAppID;
-    console.log(steamAppID);
+
+    if (steamAppID === null) {
+      throw new Error("Game is not available in Cheapshark database")
+    }
 
     // Fetch game details from Steam's app details API using steamAppID
     const steamAppResponse = await fetch(
