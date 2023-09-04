@@ -61,7 +61,8 @@ block content
           .col-md-3
             .card.mb-3.border.m-3
               .card-body 
-                img.card-img-top(src=review.snippet.thumbnails.high.url, alt=review.snippet.title, style='max-width: 100%; max-height: 100%;')
+                //- Embed YouTube video using an iframe with larger dimensions
+                iframe.embed-responsive.embed-responsive-16by9(style='width: 100%; height: 200px;', src='https://www.youtube.com/embed/' + review.id.videoId, frameborder='0', allowfullscreen='true')
                 h5.card-title.mt-2!= review.snippet.title
                 p.card-text #{review.snippet.description}
                 p.card-text Published: #{new Date(review.snippet.publishedAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
