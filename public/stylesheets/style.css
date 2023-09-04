@@ -24,3 +24,19 @@ span.platform_img {
 	height: 20px;
 	background-repeat: no-repeat;
 }
+
+.requirements {
+  text-align: center;
+  margin: 20px 0; /* Add margin for spacing */
+  padding: 10px; /* Add padding for spacing */
+}
+
+/* Remove bullet points from unordered lists */
+.requirements ul {
+  list-style-type: none;
+}
+
+/* Center-align text within list items */
+.requirements ul li {
+  text-align: center;
+}
