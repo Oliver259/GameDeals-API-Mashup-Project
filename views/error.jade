@@ -5,13 +5,21 @@ block content
     h1= "Oops! Something went wrong."
     if error
       h2 Error Details:
-      .alert.alert-danger
-        p
-          strong #{error.message}
+      - if (error.message === "Cannot read properties of undefined (reading 'gameID')") // Corrected typo here
+        .alert.alert-danger
+          p 
+            strong Game deals not found
+      - else
+        .alert.alert-danger
+          p
+            strong #{error.message}
       h2 What can you do?
       - if (error.status === 404) // Check if the error status is 404
         .alert.alert-info
           p This page is not found. Please check the URL and try again.
+       - if (error.message === "Cannot read properties of undefined (reading 'gameID')") // Check if the error status is 404
+        .alert.alert-info
+          p This game is not found. Please check the URL and try again.
       - else
         .alert.alert-info
           p

@@ -4,10 +4,7 @@ var router = express.Router();
 const { google } = require('googleapis'); 
 
 const Youtube_API_KEY = 'AIzaSyA3WxDsVXc07K6DSkl0uqLRtxPYcLqBbrU';
-// API_KEY = "EA1D9E34754E899A4983EC1A9F1C687E";
 /* GET home page. */
-
-// TODO: Add UI for game search and game deals so the user can see the response
 
 router.get('/', (req, res) => {
   res.render('index', { title: 'Steam ID Input' });
@@ -74,7 +71,7 @@ router.get("/details/:gameTitle", async function (req, res, next) {
     const steamAppID = gameDealsData.info.steamAppID;
 
     if (steamAppID === null) {
-      throw new Error("Game is not available in Cheapshark database")
+      throw new Error("Game is not available")
     }
 
     // Fetch game details from Steam's app details API using steamAppID
