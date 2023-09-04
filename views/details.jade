@@ -21,7 +21,7 @@ block content
             .col-md-3
                 .card.ms-4.mb-4.me-4.border
                     .card-body
-                        img(src="https://www.cheapshark.com/img/stores/banners/" + deal.storeID + ".png")
+                        img(src="https://www.cheapshark.com/img/stores/banners/" + (deal.storeID -1) + ".png")
                         p.card-text Price: $#{deal.price} USD
                         p.card-text Retail Price: $#{deal.retailPrice} USD
                         p.card-text Savings: #{((deal.retailPrice - deal.price) / deal.retailPrice * 100).toFixed(2)}%
