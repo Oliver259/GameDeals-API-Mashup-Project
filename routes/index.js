@@ -1,17 +1,17 @@
 var express = require("express");
 var router = express.Router();
-const { google } = require('googleapis'); 
+const { google } = require("googleapis");
 const AWS = require("aws-sdk");
 require("dotenv").config();
 
 const Youtube_API_KEY = process.env.Youtube_API_KEY;
 
-// Configure AWS SDK 
+// Configure AWS SDK
 AWS.config.update({
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    sessionToken: process.env.AWS_SESSION_TOKEN,
-    region: "ap-southeast-2",
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  sessionToken: process.env.AWS_SESSION_TOKEN,
+  region: "ap-southeast-2",
 });
 
 // Create an S3 client
@@ -23,16 +23,16 @@ const objectKey = "counter.json";
 
 // Define a function to create the S3 buckert if it doesn't exist
 async function createS3Bucket() {
-    try {
-        await s3.createBucket( { Bucket: bucketName }).promise();
-        console.log(`Created bucket: ${bucketName}`);
-    } catch (err) {
-        if (err.statusCode === 409) {
-            console.log(`Bucket already exists: ${bucketName}`);
+  try {
+    await s3.createBucket({ Bucket: bucketName }).promise();
+    console.log(`Created bucket: ${bucketName}`);
+  } catch (err) {
+    if (err.statusCode === 409) {
+      console.log(`Bucket already exists: ${bucketName}`);
     } else {
-        console.log(`Error creating bucket: ${err}`);
+      console.log(`Error creating bucket: ${err}`);
     }
-}
+  }
 }
 
 // Define a function to increment the page counter
@@ -52,26 +52,25 @@ async function incrementPageCounter() {
 
     // Upload the updated counter back to S3
     const updateParams = {
-        Bucket: bucketName,
-        Key: objectKey,
-        Body: JSON.stringify(parsedData), // Convert JSON to string
-        ContentType: "application/json", // Set content type
+      Bucket: bucketName,
+      Key: objectKey,
+      Body: JSON.stringify(parsedData), // Convert JSON to string
+      ContentType: "application/json", // Set content type
     };
 
     try {
-        await s3.putObject(updateParams).promise();
-        console.log("JSON file uploaded successfully.");
+      await s3.putObject(updateParams).promise();
+      console.log("JSON file uploaded successfully.");
     } catch (err) {
-        console.error("Error uploading JSON file:", err);
+      console.error("Error uploading JSON file:", err);
     }
   } catch (err) {
     console.error("Error incrementing page counter:", err);
   }
 }
 
-
 /* GET home page. */
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   await createS3Bucket();
   await incrementPageCounter();
 
@@ -85,11 +84,14 @@ router.get('/', async (req, res) => {
     const parsedData = JSON.parse(data.Body.toString("utf-8"));
 
     // Render the home page with the counter
-    res.render('index', {title: 'Steam ID Input', pageCount: parsedData.count});
+    res.render("index", {
+      title: "Steam ID Input",
+      pageCount: parsedData.count,
+    });
   } catch (err) {
     console.error("Error fetching page counter;", err);
     // Render the home page without the coutner if an error occurs
-    res.render('index', { title: 'Steam ID Input' });
+    res.render("index", { title: "Steam ID Input" });
   }
 });
 
@@ -100,7 +102,7 @@ router.post("/wishlist", function (req, res) {
 
 router.get("/wishlist/:steamID", async function (req, res, next) {
   try {
-    const STEAM_ID = req.params.steamID
+    const STEAM_ID = req.params.steamID;
     const totalPages = 10;
     const wishlistedGames = [];
 
@@ -154,7 +156,7 @@ router.get("/details/:gameTitle", async function (req, res, next) {
     const steamAppID = gameDealsData.info.steamAppID;
 
     if (steamAppID === null) {
-      throw new Error("Game is not available")
+      throw new Error("Game is not available");
     }
 
     // Fetch game details from Steam's app details API using steamAppID
@@ -165,7 +167,7 @@ router.get("/details/:gameTitle", async function (req, res, next) {
 
     // Initialize the Youtube API client
     const youtube = google.youtube({
-      version: 'v3',
+      version: "v3",
       auth: Youtube_API_KEY,
     });
 
@@ -173,7 +175,7 @@ router.get("/details/:gameTitle", async function (req, res, next) {
     const youtubeSearchResponse = await youtube.search.list({
       q: `${gameTitle} review`,
       maxResults: 8,
-      part: 'snippet'
+      part: "snippet",
     });
 
     const youtubeSearchResults = youtubeSearchResponse.data.items;
