@@ -5,10 +5,10 @@ block content
     .row
       .col-md-6.offset-md-3
         h1.text-center Enter Your Steam ID
-        form(action="/wishlist", method="POST")
+        form(id="steamIDForm", action="/wishlist", method="POST")
           .form-group
             label(for="steamId") Steam ID:
-            input#steamId.form-control(type="text", name="steamID", placeholder="Enter your Steam ID", required)
+            input#steamId.form-control(type="text", name="steamID", placeholder="Enter your Steam ID", pattern="[0-9]{17}", title="Steam ID must be 17 digits exactly", required)
           .form-group.text-center.mt-2
             button.btn.btn-primary(type="submit") Go to Wishlist
 
