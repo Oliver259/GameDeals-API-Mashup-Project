@@ -3,14 +3,14 @@ extends layout
 
 block content
   .text-center
-    h1.mt-4.mb-4= title
     if gameDeals.info
-      img(src=steamAppDetails.header_image, alt=gameDeals.info.title)
+      img.mt-4(src=steamAppDetails.header_image, alt=gameDeals.info.title)
       h2= gameDeals.info.title
       
     if steamAppDetails 
       if steamAppDetails.short_description 
-        p!= steamAppDetails.short_description
+        .container
+          p!= steamAppDetails.short_description
     if gameDeals.cheapestPriceEver
       p Cheapest Price Ever: $#{gameDeals.cheapestPriceEver.price} USD
 
@@ -62,8 +62,9 @@ block content
             .card.mb-3.border.m-3
               .card-body 
                 //- Embed YouTube video using an iframe with larger dimensions
-                iframe.embed-responsive.embed-responsive-16by9(style='width: 100%; height: 200px;', src='https://www.youtube.com/embed/' + review.id.videoId, frameborder='0', allowfullscreen='true')
+                iframe.embed-responsive.embed-responsive-16by9(style='width: 100%; height: 300px;', src='https://www.youtube.com/embed/' + review.id.videoId, frameborder='0', allowfullscreen='true')
                 h5.card-title.mt-2!= review.snippet.title
+                p.card-text By #{review.snippet.channelTitle}
                 p.card-text #{review.snippet.description}
                 p.card-text Published: #{new Date(review.snippet.publishedAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
                 a.btn.btn-primary(href='https://www.youtube.com/watch?v=' + review.id.videoId, target='_blank') Watch Video
