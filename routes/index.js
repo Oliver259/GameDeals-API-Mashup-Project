@@ -113,6 +113,11 @@ router.get("/wishlist/:steamID", async function (req, res, next) {
 
       const steamWishlistData = await steamWishlistResponse.json();
 
+      // Check if the Steam ID was not found
+      if (steamWishlistData.success !== 1) {
+        throw new Error("Steam ID is not found");
+      }
+
       const gamesOnPage = Object.values(steamWishlistData);
       wishlistedGames.push(...gamesOnPage);
     }
