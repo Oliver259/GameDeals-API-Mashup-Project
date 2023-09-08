@@ -16,7 +16,8 @@ AWS.config.update({
 
 console.log("Access Key ID: " + process.env.AWS_ACCESS_KEY_ID);
 console.log("Secret Access Key: " + process.env.AWS_SECRET_ACCESS_KEY);
-console.log("Session Token: " + process.env.AWS_SESSION_TOKEN)
+console.log("Session Token: " + process.env.AWS_SESSION_TOKEN);
+
 // Create an S3 client
 const s3 = new AWS.S3();
 
@@ -124,7 +125,7 @@ router.get("/wishlist/:steamID", async function (req, res, next) {
       const steamWishlistData = await steamWishlistResponse.json();
 
       // Check if the Steam ID was not found
-      if (steamWishlistData.success !== 1) {
+      if (steamWishlistData.success === 2) {
         throw new Error("Steam ID is not found");
       }
 
