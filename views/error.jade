@@ -6,10 +6,14 @@ block content
       h1= "Oops! Something went wrong."
       if error
         h2 Error Details:
-        - if (error.message === "Cannot read properties of undefined (reading 'gameID')") // Corrected typo here
+        - if (error.message === "Cannot read properties of undefined (reading 'gameID')")
           .alert.alert-danger
             p 
               strong Game deals not found
+        - else if (error.message === "The request is missing a valid API key.")
+          .alert.alert-danger 
+            p 
+              strong Invalid Youtube API key.
         - else
           .alert.alert-danger
             p
@@ -21,9 +25,12 @@ block content
         - else if (error.message === "Steam ID is not found")
           .alert.alert-info
             p Make sure the Steam ID is exactly 17 digits and check the Steam ID entered again.
-        - else if (error.message === "Cannot read properties of undefined (reading 'gameID')") // Check if the error status is 404
+        - else if (error.message === "Cannot read properties of undefined (reading 'gameID')")
           .alert.alert-info
             p This game is not found. Please check the URL and try again.
+        - else if (error.message === "The request is missing a valid API key.")
+          .alert.alert-info 
+            p Enter a valid Youtube API key.
         - else
           .alert.alert-info
             p
