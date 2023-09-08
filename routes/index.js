@@ -147,7 +147,7 @@ router.get("/wishlist/:steamID", async function (req, res, next) {
   }
 });
 
-router.get("/details/:gameTitle", async function (req, res, next) {
+router.get("/deals/:gameTitle", async function (req, res, next) {
   try {
     const gameTitle = req.params.gameTitle;
 
@@ -196,8 +196,8 @@ router.get("/details/:gameTitle", async function (req, res, next) {
 
     const youtubeSearchResults = youtubeSearchResponse.data.items;
 
-    res.render("details", {
-      title: "Game Details",
+    res.render("deals", {
+      title: "Game Deals",
       gameDeals: gameDealsData,
       steamAppDetails: steamAppDetailsData[steamAppID].data, // Extract data for the specific steamAppID
       youtubeReviews: youtubeSearchResults, // Pass the Youtube search results to the template
