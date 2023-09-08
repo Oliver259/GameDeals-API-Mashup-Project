@@ -14,6 +14,9 @@ AWS.config.update({
   region: "ap-southeast-2",
 });
 
+console.log("Access Key ID: " + process.env.AWS_ACCESS_KEY_ID);
+console.log("Secret Access Key: " + process.env.AWS_SECRET_ACCESS_KEY);
+console.log("Session Token: " + process.env.AWS_SESSION_TOKEN)
 // Create an S3 client
 const s3 = new AWS.S3();
 
@@ -71,6 +74,13 @@ async function incrementPageCounter() {
 
 /* GET home page. */
 router.get("/", async (req, res) => {
+  // Check for AWS configuration
+  // Check for AWS configuration
+  if (!process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY) {
+    console.error("AWS Access Key ID and Secret Access Key are required.");
+    return res.render("index", { title: "Steam ID Input" }); // Render the home page without the counter
+  }
+
   await createS3Bucket();
   await incrementPageCounter();
 
