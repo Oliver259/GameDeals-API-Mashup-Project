@@ -54,7 +54,7 @@ router.get("/:gameTitle", async function (req, res, next) {
     const youtubeSearchResults = youtubeSearchResponse.data.items;
 
     res.render("deals", {
-      title: "Game Deals",
+      title: `${gameTitle} Deals`,
       gameDeals: gameDealsData,
       steamAppDetails: steamAppDetailsData[steamAppID].data, // Extract data for the specific steamAppID
       youtubeReviews: youtubeSearchResults, // Pass the Youtube search results to the template
