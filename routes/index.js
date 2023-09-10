@@ -82,7 +82,7 @@ router.get("/", async (req, res) => {
     console.error(
       "AWS Access Key ID, Secret Access Key and Session Token are required."
     );
-    return res.render("index", { title: "Steam ID Input" }); // Render the home page without the counter
+    return res.render("index", { title: "GameDeals" }); // Render the home page without the counter
   }
 
   await createS3Bucket();
@@ -99,13 +99,13 @@ router.get("/", async (req, res) => {
 
     // Render the home page with the counter
     res.render("index", {
-      title: "Steam ID Input",
+      title: "GameDeals",
       pageCount: parsedData.count,
     });
   } catch (err) {
     console.error("Error fetching page counter;", err);
     // Render the home page without the coutner if an error occurs
-    res.render("index", { title: "Steam ID Input" });
+    res.render("index", { title: "GameDeals" });
   }
 });
 
