@@ -12,10 +12,6 @@ AWS.config.update({
   region: "ap-southeast-2",
 });
 
-console.log("Access Key ID: " + process.env.AWS_ACCESS_KEY_ID);
-console.log("Secret Access Key: " + process.env.AWS_SECRET_ACCESS_KEY);
-console.log("Session Token: " + process.env.AWS_SESSION_TOKEN);
-
 // Create an S3 client
 const s3 = new AWS.S3();
 
@@ -23,7 +19,7 @@ const s3 = new AWS.S3();
 const bucketName = "cab432-n11243244-page-counter";
 const objectKey = "counter.json";
 
-// Define a function to create the S3 buckert if it doesn't exist
+// Define a function to create the S3 bucket if it doesn't exist
 async function createS3Bucket() {
   try {
     await s3.createBucket({ Bucket: bucketName }).promise();
@@ -73,17 +69,6 @@ async function incrementPageCounter() {
 
 /* GET home page. */
 router.get("/", async (req, res) => {
-  // Check for AWS configuration
-  if (
-    !process.env.AWS_ACCESS_KEY_ID ||
-    !process.env.AWS_SECRET_ACCESS_KEY ||
-    !process.env.AWS_SESSION_TOKEN
-  ) {
-    console.error(
-      "AWS Access Key ID, Secret Access Key and Session Token are required."
-    );
-    return res.render("index", { title: "GameDeals" }); // Render the home page without the counter
-  }
 
   await createS3Bucket();
   await incrementPageCounter();
