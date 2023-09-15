@@ -3,7 +3,7 @@ const router = express.Router();
 
 router.get("/:steamID", async function (req, res, next) {
   try {
-    const STEAM_ID = req.params.steamID;
+    const STEAM_ID = req.params.steamID; // Extract the steamID from the request parameters
     const totalPages = 10;
     const wishlistedGames = [];
 
@@ -23,6 +23,7 @@ router.get("/:steamID", async function (req, res, next) {
       wishlistedGames.push(...gamesOnPage);
     }
 
+    // Render the wishlist template
     res.render("wishlist", {
       title: "Wishlist",
       games: wishlistedGames,

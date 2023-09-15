@@ -53,10 +53,11 @@ router.get("/:gameTitle", async function (req, res, next) {
 
     const youtubeSearchResults = youtubeSearchResponse.data.items;
 
+    // Render the deals page
     res.render("deals", {
       title: `${gameTitle} Deals`,
-      gameDeals: gameDealsData,
-      steamAppDetails: steamAppDetailsData[steamAppID].data, // Extract data for the specific steamAppID
+      gameDeals: gameDealsData, // Pass the game deals data to the template
+      steamAppDetails: steamAppDetailsData[steamAppID].data, // Extract data for the specific steamAppID and pass it into the template
       youtubeReviews: youtubeSearchResults, // Pass the Youtube search results to the template
     });
   } catch (error) {
