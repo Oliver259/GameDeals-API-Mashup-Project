@@ -12,5 +12,7 @@ block content
           .form-group.text-center.mt-2
             button.btn.btn-primary(type="submit") Go to Wishlist
 
-        h2.text-center 
-          Page Visits: #{pageCount}
+        // Conditionally render the page visits counter
+        if pageCount !== undefined
+          h2.text-center
+            | Page Visits: #{pageCount}
