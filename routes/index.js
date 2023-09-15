@@ -22,13 +22,10 @@ const objectKey = "counter.json";
 // Define a function to create the S3 bucket if it doesn't exist
 async function createS3Bucket() {
   try {
-    await s3.createBucket({ Bucket: bucketName }).promise();
-    console.log(`Created bucket: ${bucketName}`);
+    await s3.createBucket({ Bucket: bucketName }).promise(); // Create the bucket
   } catch (err) {
-    if (err.statusCode === 409) {
-      console.log(`Bucket already exists: ${bucketName}`);
-    } else {
-      console.log(`Error creating bucket: ${err}`);
+    if (err.statusCode === 409) { // If Bucket already exists
+    } else { // Error creating bucket
     }
   }
 }
@@ -58,12 +55,9 @@ async function incrementPageCounter() {
 
     try {
       await s3.putObject(updateParams).promise();
-      console.log("JSON file uploaded successfully.");
     } catch (err) {
-      console.error("Error uploading JSON file:", err);
     }
   } catch (err) {
-    console.error("Error incrementing page counter:", err);
   }
 }
 
@@ -87,8 +81,7 @@ router.get("/", async (req, res) => {
       title: "GameDeals",
       pageCount: parsedData.count,
     });
-  } catch (err) {
-    console.error("Error fetching page counter;", err);
+  } catch (err) { // Error fetching page counter
     // Render the home page without the coutner if an error occurs
     res.render("index", { title: "GameDeals" });
   }

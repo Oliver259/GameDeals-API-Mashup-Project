@@ -60,7 +60,6 @@ router.get("/:gameTitle", async function (req, res, next) {
       youtubeReviews: youtubeSearchResults, // Pass the Youtube search results to the template
     });
   } catch (error) {
-    console.error("Error fetching game details and deals:", error);
     res.render("error", {
       games: [],
       error: error,

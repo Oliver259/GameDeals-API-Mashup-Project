@@ -28,7 +28,6 @@ router.get("/:steamID", async function (req, res, next) {
       games: wishlistedGames,
     });
   } catch (error) {
-    console.error("Error fetching wishlist data:", error);
     res.render("error", {
       title: "Error",
       games: [],
