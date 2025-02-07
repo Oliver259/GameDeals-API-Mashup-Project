@@ -29,6 +29,7 @@ router.get("/:steamID", async function (req, res, next) {
       games: wishlistedGames,
     });
   } catch (error) {
+    // Render the error page
     res.render("error", {
       title: "Error",
       games: [],
