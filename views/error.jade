@@ -31,6 +31,9 @@ block content
         - else if (error.message === "The request is missing a valid API key.")
           .alert.alert-info 
             p Enter a valid Youtube API key.
+        - else if (error.message === "Page not found")
+          .alert.alert-info 
+            p Make sure the wishlist page is valid and not below or past the minimum or maximum page
         - else
           .alert.alert-info
             p

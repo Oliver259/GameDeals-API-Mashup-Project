@@ -3,6 +3,12 @@ extends layout
 block content
   .text-center
     h1.mt-4.mb-4= title
+  .text-center.mt-4.mb-4
+    p Page #{currentPage} of #{totalPages}
+    if currentPage > 1
+      a.btn.btn-secondary.me-2(href="/wishlist/" + steamID + "/" + (currentPage - 1)) Previous
+    if hasNextPage
+      a.btn.btn-secondary.ms-2(href="/wishlist/" + steamID + "/" + (currentPage + 1)) Next
   .row.mx-auto
     each game in games
       .col-md-2
@@ -29,8 +35,9 @@ block content
                     img(src='/images/icon_platform_mac.png', alt='Mac')
                   else if platform === 'linux'
                     img(src='/images/icon_platform_linux.png', alt='Linux')
-  .text-center.mt-4
+  .text-center.mt-4.mb-4
+    p Page #{currentPage} of #{totalPages}
     if currentPage > 1
-      a.btn.btn-secondary(href="/wishlist/" + steamID + "/" + (currentPage - 1)) Previous
+      a.btn.btn-secondary.me-2(href="/wishlist/" + steamID + "/" + (currentPage - 1)) Previous
     if hasNextPage
-      a.btn.btn-secondary(href="/wishlist/" + steamID + "/" + (currentPage + 1)) Next
+      a.btn.btn-secondary.ms-2(href="/wishlist/" + steamID + "/" + (currentPage + 1)) Next

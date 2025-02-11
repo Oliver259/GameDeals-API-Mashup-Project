@@ -77,9 +77,18 @@ router.get("/:steamID/:page?", async function (req, res, next) {
       `https://api.steampowered.com/IWishlistService/GetWishlist/v1?steamid=${STEAM_ID}`
     );
 
-    // Check if the Steam ID was not found
+    // Check if the Steam ID was not found or the wishlist is empty
     if (!wishlistData.response || !wishlistData.response.items) {
       throw new Error("Steam ID is not found or wishlist is empty");
+    }
+
+    // Calculate the total number of pages
+    const totalItems = wishlistData.response.items.length;
+    const totalPages = Math.ceil(totalItems / items_per_page);
+
+    // Check if the requested page number is valid
+    if (page > totalPages) {
+      throw new Error("Page not found");
     }
 
     // Calculate the start and end indices for the current page
@@ -108,6 +117,7 @@ router.get("/:steamID/:page?", async function (req, res, next) {
       title: "Wishlist",
       games: wishlistedGames,
       currentPage: page,
+      totalPages: totalPages,
       hasNextPage: endIndex < wishlistData.response.items.length,
       steamID: STEAM_ID,
     });
