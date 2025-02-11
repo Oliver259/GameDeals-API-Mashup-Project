@@ -7,7 +7,7 @@ block content
     each game in games
       .col-md-2
         .card.mb-4
-          img.card-img-top(src=game.header_image, alt=game.name, style=`max-height: 100%; object-fit: contain;`)
+          img.card-img-top(src=game.header_image, alt=game.name, style="max-height: 100%; object-fit: contain;")
           .card-body
             h5.card-title= game.name
             if game.metacritic
@@ -18,7 +18,7 @@ block content
               p.card-text Metacritic score: N/A
             p.card-text Release Date: #{game.release_date.coming_soon ? 'Coming Soon' : game.release_date.date}
             .d-flex.align-items-center
-              a.btn.btn-primary(href=`/deals/${encodeURIComponent(game.name)}`) Deals
+              a.btn.btn-primary(href="/deals/" + encodeURIComponent(game.name)) Deals
               // Parse platform_icons and display corresponding icons
               - const platforms = game.platforms ? Object.keys(game.platforms).filter(platform => game.platforms[platform]) : []
               each platform in platforms
@@ -29,3 +29,8 @@ block content
                     img(src='/images/icon_platform_mac.png', alt='Mac')
                   else if platform === 'linux'
                     img(src='/images/icon_platform_linux.png', alt='Linux')
+  .text-center.mt-4
+    if currentPage > 1
+      a.btn.btn-secondary(href="/wishlist/" + steamID + "/" + (currentPage - 1)) Previous
+    if hasNextPage
+      a.btn.btn-secondary(href="/wishlist/" + steamID + "/" + (currentPage + 1)) Next
