@@ -2,17 +2,17 @@ extends layout
 
 block content
   .text-center
-    h1.mt-4.mb-4= title
-  .text-center.mt-4.mb-4
+    h1.mt-4= title
+  .text-center
     p Page #{currentPage} of #{totalPages}
     if currentPage > 1
       a.btn.btn-secondary.me-2(href="/wishlist/" + steamID + "/" + (currentPage - 1)) Previous
     if hasNextPage
       a.btn.btn-secondary.ms-2(href="/wishlist/" + steamID + "/" + (currentPage + 1)) Next
-  .row.mx-auto
+  .row.mx-auto.px-4.py-4
     each game in games
-      .col-md-2
-        .card.mb-4
+      .col-12.col-sm-2.col-md-6.col-lg-4.col-xl-3
+        .card
           img.card-img-top(src=game.header_image, alt=game.name, style="max-height: 100%; object-fit: contain;")
           .card-body
             h5.card-title= game.name

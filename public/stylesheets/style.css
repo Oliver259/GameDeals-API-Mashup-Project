@@ -1,28 +1,27 @@
-
 a {
   color: #00B7FF;
 }
 
 /* Windows logo was downloaded from https://store.cloudflare.steamstatic.com/public/images/v6/icon_platform_win.png?v=38 */
 span.platform_img.win {
-	background-image: url( '/images/icon_platform_win.png' );
+    background-image: url( '/images/icon_platform_win.png' );
 }
 
 /* Mac logo was downloaded from https://store.cloudflare.steamstatic.com/public/images/v6/icon_platform_mac.png?v=3 */
 span.platform_img.mac {
-	background-image: url( '/images/icon_platform_mac.png' );
+    background-image: url( '/images/icon_platform_mac.png' );
 }
 
 /* Linux logo was downloaded from https://store.cloudflare.steamstatic.com/public/images/v6/icon_platform_linux.png?v=3 */
 span.platform_img.linux {
-	background-image: url( '/images/icons8-linux-50.png' );
+    background-image: url( '/images/icons8-linux-50.png' );
 }
 
 span.platform_img {
-	display: inline-block;
-	width: 20px;
-	height: 20px;
-	background-repeat: no-repeat;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
 }
 
 .requirements {
@@ -34,4 +33,29 @@ span.platform_img {
 /* Remove bullet points from unordered lists */
 .requirements ul {
   list-style-type: none;
+}
+
+/* Ensure images are responsive */
+.card-img-top {
+  width: 100%;
+  height: auto;
+}
+
+/* Adjust card styles for different screen sizes */
+@media (max-width: 576px) {
+  .card {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .card {
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .card {
+    margin-bottom: 2rem;
+  }
 }

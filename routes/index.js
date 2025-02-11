@@ -16,7 +16,7 @@ AWS.config.update({
 const s3 = new AWS.S3();
 
 // Specify the bucket and object key
-const bucketName = "cab432-n11243244-page-counter";
+const bucketName = "page-counter";
 const objectKey = "counter.json";
 
 // Define a function to create the S3 bucket if it doesn't exist
