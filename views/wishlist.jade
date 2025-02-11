@@ -7,14 +7,25 @@ block content
     each game in games
       .col-md-2
         .card.mb-4
-          img.card-img-top(src=game.capsule, alt=game.name, style=`max-height: 100%; object-fit: contain;`)
+          img.card-img-top(src=game.header_image, alt=game.name, style=`max-height: 100%; object-fit: contain;`)
           .card-body
             h5.card-title= game.name
-            p.card-text Overall Reviews: #{game.review_desc}
-            p.card-text Release Date: #{game.release_string}
+            if game.metacritic
+              p.card-text
+                | Metacritic score: 
+                a(href=game.metacritic.url target="_blank")= game.metacritic.score
+            else
+              p.card-text Metacritic score: N/A
+            p.card-text Release Date: #{game.release_date.coming_soon ? 'Coming Soon' : game.release_date.date}
             .d-flex.align-items-center
               a.btn.btn-primary(href=`/deals/${encodeURIComponent(game.name)}`) Deals
               // Parse platform_icons and display corresponding icons
-              - const platforms = game.platform_icons.match(/win|mac|linux/g) || []
+              - const platforms = game.platforms ? Object.keys(game.platforms).filter(platform => game.platforms[platform]) : []
               each platform in platforms
-                span.platform_img.ms-2(class=platform)
+                span.platform_img.ms-2
+                  if platform === 'windows'
+                    img(src='/images/icon_platform_win.png', alt='Windows')
+                  else if platform === 'mac'
+                    img(src='/images/icon_platform_mac.png', alt='Mac')
+                  else if platform === 'linux'
+                    img(src='/images/icon_platform_linux.png', alt='Linux')

@@ -4,23 +4,34 @@ const router = express.Router();
 router.get("/:steamID", async function (req, res, next) {
   try {
     const STEAM_ID = req.params.steamID; // Extract the steamID from the request parameters
-    const totalPages = 10;
     const wishlistedGames = [];
 
-    for (let page = 0; page < totalPages; page++) {
-      const steamWishlistResponse = await fetch(
-        `https://store.steampowered.com/wishlist/profiles/${STEAM_ID}/wishlistdata/?p=${page}`
+    // Fetch the wishlist items
+    const wishlistResponse = await fetch(
+      `https://api.steampowered.com/IWishlistService/GetWishlist/v1?steamid=${STEAM_ID}`
+    );
+    console.log(wishlistResponse)
+
+    const wishlistData = await wishlistResponse.json();
+
+    // Check if the Steam ID was not found
+    if (!wishlistData.response || !wishlistData.response.items) {
+      throw new Error("Steam ID is not found or wishlist is empty");
+    }
+
+    // Fetch details for each game in the wishlist
+    for (const item of wishlistData.response.items) {
+      const appid = item.appid;
+      const gameDetailsResponse = await fetch(
+        `https://store.steampowered.com/api/appdetails?appids=${appid}`
       );
 
-      const steamWishlistData = await steamWishlistResponse.json();
+      const gameDetailsData = await gameDetailsResponse.json();
+      console.log(gameDetailsData)
 
-      // Check if the Steam ID was not found
-      if (steamWishlistData.success === 2) {
-        throw new Error("Steam ID is not found");
+      if (gameDetailsData[appid].success) {
+        wishlistedGames.push(gameDetailsData[appid].data);
       }
-
-      const gamesOnPage = Object.values(steamWishlistData);
-      wishlistedGames.push(...gamesOnPage);
     }
 
     // Render the wishlist template

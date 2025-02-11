@@ -57,9 +57,6 @@ This project is a web application mashup that utilizes public data and service A
 1. **Access the application:** Open your browser and go to `http://localhost:3000`
 2. **Enter your Steam ID:** Enter your Steam ID to view your wishlist and game deals.
 
-## Note
-**This project no longer works as intended because Steam has changed their API, which now goes to the Steam home page instead of displaying wishlist data in json format.** As a result, the application is unable to fetch the user's wishlist from Steam.
-
 ## Deployment
 The application is deployed on an AWS EC2 instance using Docker. Follow these steps to deploy the application:
 
