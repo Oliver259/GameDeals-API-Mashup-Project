@@ -27,7 +27,7 @@ block content
                         p.card-text Savings: #{((deal.retailPrice - deal.price) / deal.retailPrice * 100).toFixed(2)}%
 
     - var pcRequirementsExist = steamAppDetails.pc_requirements && (steamAppDetails.pc_requirements.minimum || steamAppDetails.pc_requirements.recommended);
-    if pcRequirementsExist
+    if platforms.windows && pcRequirementsExist
       h4 PC Requirements
       .requirements
         if steamAppDetails.pc_requirements.minimum
@@ -36,7 +36,7 @@ block content
           span.card-text!= steamAppDetails.pc_requirements.recommended
       
     - var macRequirementsExist = steamAppDetails.mac_requirements && (steamAppDetails.mac_requirements.minimum || steamAppDetails.mac_requirements.recommended);
-    if macRequirementsExist
+    if platforms.mac && macRequirementsExist
       h4 Mac Requirements 
       .requirements
         if steamAppDetails.mac_requirements.minimum
@@ -45,7 +45,7 @@ block content
           span.card-text!= steamAppDetails.mac_requirements.recommended
 
     - var linuxRequirementsExist = steamAppDetails.linux_requirements && (steamAppDetails.linux_requirements.minimum || steamAppDetails.linux_requirements.recommended);
-    if linuxRequirementsExist
+    if platforms.linux && linuxRequirementsExist
       h4 Linux Requirements 
       .requirements
         if steamAppDetails.linux_requirements.minimum
@@ -53,8 +53,7 @@ block content
         if steamAppDetails.linux_requirements.recommended
           span.card-text!= steamAppDetails.linux_requirements.recommended
 
-
-     if youtubeReviews
+    if youtubeReviews
       h3 Youtube Reviews
       .row.justify-content-center
         each review in youtubeReviews
